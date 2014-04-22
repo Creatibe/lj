@@ -634,9 +634,9 @@ switch ($screen):
 		getMSG("cb-005",$screen,NULL);
 		break;
 endswitch;
+// Função para atualizar todos os produtos da Categoria que foi modificada
 	function alt_prod_detalhes($id=null,$retorno=null,$userid=null,$user_ip=null,$acao=null,$rotina=null)
 {
-					
 				if (isset($id) != null):
 					echo "<script>alert('As definições Categoria do Produto foram alteradas. Os Produtos afetados nesta Alteração ficarão com o Status PENDENTE e Será necessário personalizar os Produtos novamente.');</script>";
 					date_default_timezone_set('America/Sao_Paulo');
@@ -656,160 +656,70 @@ endswitch;
 							$$cat  = $resdb_cat->$cat; 
 							if ($$cat > 0):
 								$n_cats ++;
-								$cats = "sub_cat_";
+								$cats = "sub_cat";
 								$cats =$cats . $n_cats; 
 								$$cats = $$cat ;
-								$a_cats[] = $$cats;
-								$nome = "nome_";
-								$nome =$nome . $n_cats; 
-								$$nome = "Selecionar";
-								$a_cats[][] = $$nome;
-								//echo "<br> ".$n_cats." - ". $cats." = ".$$cats;
 							endif; 
-							//echo "<br> ".$i." - ". $cat." = ".$$cat;
 					endfor;
-					echo "<pre>";
-						print_r($a_cats);
-					echo "</pre>";
-					//exit;
 					$lerdb_prod = new produtos_detalhes();
 					$lerdb_prod->extra_select = "WHERE prod_categorias_id=".$id;
 					$lerdb_prod->selectAll($lerdb_prod);
 					$a_prod_det = array();
-					$alt_prod_det= 0;
 					while ($resdb_prod = $lerdb_prod->returnData()):
 						$n_cat = 21;
 						for ($i = 1; $i < $n_cat; $i++):
 							$x_sc = "sub_cat_";
 							$x_sc =$x_sc . $i;
-							$x_sct= "sub_cat_temp_";
-							$x_sct=$x_sct. $i;
 							$x_nm = "nome_";
 							$x_nm =$x_nm . $i; 
-							$x_nmt = "nome_temp_";
-							$x_nmt=$x_nmt . $i; 
-							$$x_nm  = $resdb_prod->$x_nm;
-							$$x_sc  = $resdb_prod->$x_sc;
-
-							//echo '<br> ler Prod_det --'.$x_sc.' : '.$$x_sc.' --- '.$x_nm. ': '.$$x_nm;
-							
-							switch ($$x_sct) {
-								case $subcat_1 : break;
-								case $subcat_2 : break;
-								case $subcat_3 : break;
-								case $subcat_4 : break;
-								case $subcat_5 : break;
-								case $subcat_6 : break;
-								case $subcat_7 : break;
-								case $subcat_8 : break;
-								case $subcat_9 : break;
-								case $subcat_10 : break;
-								case $subcat_11 : break;
-								case $subcat_12 : break;
-								case $subcat_13 : break;
-								case $subcat_14 : break;
-								case $subcat_15 : break;
-								case $subcat_16 : break;
-								case $subcat_17 : break;
-								case $subcat_18 : break;
-								case $subcat_19 : break;
-								case $subcat_20 : break;
+							$t_sc = "subcat";
+							$t_sc =$t_sc . $i;
+							$t_nm = "nome";
+							$t_nm =$t_nm . $i;
+							$$t_nm  = $resdb_prod->$x_nm;
+							$$t_sc  = $resdb_prod->$x_sc;
+							switch ($$t_sc) {
+								case $sub_cat_1  : break;
+								case $sub_cat_2  : break;
+								case $sub_cat_3  : break;
+								case $sub_cat_4  : break;
+								case $sub_cat_5  : break;
+								case $sub_cat_6  : break;
+								case $sub_cat_7  : break;
+								case $sub_cat_8  : break;
+								case $sub_cat_9  : break;
+								case $sub_cat_10 : break;
+								case $sub_cat_11 : break;
+								case $sub_cat_12 : break;
+								case $sub_cat_13 : break;
+								case $sub_cat_14 : break;
+								case $sub_cat_15 : break;
+								case $sub_cat_16 : break;
+								case $sub_cat_17 : break;
+								case $sub_cat_18 : break;
+								case $sub_cat_19 : break;
+								case $sub_cat_20 : break;
 								default: 
-									//echo "<br> valor da sub_cat: ".$$x_sc;
-									if ($$x_sct != 0): $$x_sct = 0; $$x_nmt = $$x_nmt; $alt_prod_det ++; endif;	
+									if ($$t_sc != 0): $$t_sc = 0; $$t_nm = ""; endif;	
 									break;
 							}
-							$a_prod_det[] = $$x_sc;
-							$a_prod_det[][] = $$x_nm;							
-						//	echo '<br> Monta Prod_det --'.$x_sct.' : '.$$x_sct.' --- '.$x_nmt. ': '.$$x_nmt;
+							$a_prod_det[] = $$t_sc;
+							$a_prod_det[] = $$t_nm;	
 						endfor;
-					echo "<pre>";
-						print_r($a_prod_det);
-					echo "</pre>";
-					
-					
-					$key = array_search('green', $array); // $key = 2;
-					
-					
-					exit;						
-						
-						for ($i = 1; $i <= $n_cats; $i++):
-							$cats = "subcat_";
-							$cats =$cats . $i; 
-							$scatok = "sub_cat_";
-							$scatok =$scatok. $i;
-							//$$scatok= $$cats;
-							$nomeok = "nome_";
-							$nomeok =$nomeok. $i;
-							
-								$x_sc = "sub_cat_temp_"; 
-								$x_sc =$x_sc . $i;
-								$x_nm = "nome_temp_";
-								$x_nm =$x_nm . $i;
-								//echo "<br>".$x_sc;							
-							
-							$ok = 0;
-							for ($n=1; $n <=20 ; $n++) {
-
-								if ($ok  == 0 ){
-									switch ($$cats) {
-										case 1  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 2  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 3  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 4  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 5  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 6  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 7  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 8  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 9  : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 10 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 11 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 12 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 13 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 14 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 15 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 16 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 17 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 18 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 19 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										case 20 : $$scatok = $$cats; $$nomeok = $$x_nm; $ok=1; 	break;
-										
-										default:  $$scatok = $$cats; $$nomeok = "Alterar";$ok=1;break;
-									}
-				//echo '<br> Prod_det ok  --'.$x_sc.' : '.$$x_sc.' --- '.$cats. ': '.$$cats. ' --- '. $nomeok.' : '.$$nomeok . " --- ". $x_nm. " --- ". $$x_nm;
-								}
-							}
-						endfor;	
-//exit;
-
-
-											
-						//echo "<br>Sub cats alteradas : ".$alt_prod_det;
-						//if ($alt_prod_det >0):
-							$n_nm = 21;
-							$n_cats = 1;	
-							for ($i = 1; $i < $n_nm; $i++):
-								$n_cats ++;
-								$x_sc = "sub_cat_";
-								$x_nm = "nome_";
-								$x_nm2 =$x_nm . $n_cats; 
-								$x_sc2 =$x_sc . $n_cats; 
-								$x_nm =$x_nm . $i; 
-								$x_sc =$x_sc . $i; 
-								//echo '<br> Verifica Prod_det 1 --'.$x_sc.' : '.$$x_sc.' --- '.$x_nm. ': '.$$x_nm;
-								if ($$x_sc  == 0):
-									$$x_nm  = $$x_nm2;
-									$$x_sc  = $$x_sc2;
-									$$x_nm2  = 0;
-									$$x_sc2  = 0;
-									
+						for ($i = 1; $i <= $n_cat; $i++):
+								$cats = "sub_cat_";
+								$cats =$cats . $i; 
+								$nome = "nome_";
+								$nome =$nome . $i; 
+								$key = array_search($$cats, $a_prod_det); 
+								if ($key !== false):
+									$$cats = $a_prod_det[$key];
+									$$nome = $a_prod_det[$key+1];
+								else:
+									$$cats = $$cats;
+									$$nome = "";
 								endif;
-								//echo '<br> Verifica Prod_det 1 --'.$x_sc.' : '.$$x_sc.' --- '.$x_nm. ': '.$$x_nm;
-								//echo '<br> Verifica Prod_det 2 --'.$x_sc2.' : '.$$x_sc2.' --- '.$x_nm2. ': '.$$x_nm2;
-								
-							endfor;
-						//endif;
-	//exit;							
+						endfor;
 						$updtdb = new produtos_detalhes(array(
 						'sub_cat_1'  =>$sub_cat_1,
 						'sub_cat_2'  =>$sub_cat_2,
@@ -858,16 +768,6 @@ endswitch;
 	
 						$updtdb ->pk_value = $resdb_prod->id;
 						$updtdb ->updateDB($updtdb );
-						
-						$updtdb = new produtos(array(
-
-						'status'     =>3,
-						'data_cad'   =>$datacad,
-						'user_id'    =>$userid,
-						));
-						$updtdb ->pk_value = $resdb_prod->produtos_id;
-						$updtdb ->updateDB($updtdb );						
-	
 						if ($updtdb->countline==1):
 						// Início  - Rotina de gravar logs
 							if(isset($resdb->id ))         $reg_id         = "<p>Reg no DB: ".$resdb->id."</p>";            else $reg_id         ="";
