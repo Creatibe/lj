@@ -1,0 +1,245 @@
+body{
+	background: #191919;
+}
+
+.principal{
+	padding:0 1% 0 5.5%;
+}
+body.painel{
+	font:14px Georgia, "Times New Roman", Times, serif;
+	color:#333;
+	background:#191919;
+}
+a:link, a:active, a:visited{
+	text-decoration:none;
+	color:#09F;
+}
+a:hover{
+	text-decoration:underline;
+}
+#wrapper{
+	width:100%;
+	margin:0 auto;
+	background:#434142;
+}
+#header{
+	height:100px;
+	border-bottom:2px solid #999;
+	float:left;
+}
+#header-logo{
+	margin: 10px 10px;
+	width: 223px;
+	height: 60px;
+	background: url('../images/creatibe/logo-painel-01.svg');
+}
+#wrap-content{
+	display:table;
+	height:auto;
+	padding:10px;
+}
+#content{
+	float:left;
+	width:795px;
+	padding-left:15px;
+}
+#content h2{
+	font-size:20px;
+	border-bottom:1px solid #999;
+	margin-bottom:10px;
+}
+#sidebar{
+	float:left;
+	width:150px;
+}
+#sidebar ul li{
+	padding:2% 5%;
+	width:90%;
+	background:#F8F8F8;
+	margin-bottom:1px;
+	font-size:16px;
+	display:block;
+}
+#accordion ul{
+	display:none;
+	margin:5px 10px;
+}
+#accordion ul li{
+	padding:2%;
+	width:96%;
+	background:#fff;
+	margin-bottom:2px;
+	display:block;
+	font-size:14px;
+}
+#footer{
+	height:20px;
+	border-top:2px solid #999;
+	padding:20px 10px;
+	text-align:center;
+}
+
+/*Config de FORMULÁRIO*/
+#loginform{
+	padding: 20px 0px 0px 0px;
+	width: 100%;
+	height: 96%;
+	background-color: #434142;
+	font-family: 'Trebuchet MS';
+}
+
+div#loginform-logo{
+	margin: 0 auto;
+	padding-bottom: 20px;
+	width: 375px;
+	height: 105px;
+	background: url('../images/creatibe/logo.svg') no-repeat;
+	text-align: center;
+}
+
+ul.loginform-title li{
+	margin: 0 auto;
+	padding-bottom: 30px;
+	width: 375px;
+	text-align: center;
+	color: #000;
+	border-bottom: 1px solid #ea8736;
+}
+
+ul.loginform-form{
+	margin-top: 20px;
+}
+
+div#loginform form.userform{
+	background: #ffa84c; /* Old browsers */
+	background: -moz-linear-gradient(top,  #ffa84c 0%, #ff7b0d 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ffa84c), color-stop(100%,#ff7b0d)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #ffa84c 0%,#ff7b0d 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #ffa84c 0%,#ff7b0d 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #ffa84c 0%,#ff7b0d 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #ffa84c 0%,#ff7b0d 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffa84c', endColorstr='#ff7b0d',GradientType=0 ); /* IE6-9 */
+
+	padding: 20px;
+	width: 400px;
+	margin: 0 auto;
+	border-radius: 10px;
+	box-shadow: 1px 1px 20px #000;
+}
+
+form input.loginform-user, form input.loginform-password{
+	width: 315px;
+	height: 35px;
+	border: 0px;
+	border-radius: 5px;
+	padding-left: 15px;
+	font-family: 'times news roman';
+	font-style: italic;
+	font-size: 15px;
+	color: #919191;
+}
+
+form input.loginform-user:focus, form input.loginform-password:focus{
+	border: 1px solid #e5b449;
+}
+
+
+.loginform-submit {
+	text-align: right;
+}
+
+fieldset{
+	padding:0px 0px;
+}
+form li{
+	padding:5px;
+	list-style:none;
+}
+
+form input[type=submit], form input[type=button]{
+	background: #fefefe; /* Old browsers */
+	background: -moz-linear-gradient(top,  #fefefe 0%, #dbdbdb 50%, #d1d1d1 51%, #e2e2e2 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fefefe), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#e2e2e2)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #fefefe 0%,#dbdbdb 50%,#d1d1d1 51%,#e2e2e2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #fefefe 0%,#dbdbdb 50%,#d1d1d1 51%,#e2e2e2 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #fefefe 0%,#dbdbdb 50%,#d1d1d1 51%,#e2e2e2 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #fefefe 0%,#dbdbdb 50%,#d1d1d1 51%,#e2e2e2 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fefefe', endColorstr='#e2e2e2',GradientType=0 ); /* IE6-9 */
+
+	cursor:pointer;
+	padding:5px 25px;
+	margin:0 5px;
+	border: 0px;
+	border-radius: 3px;
+	color: #555;
+}
+form input[type=submit]:hover, form input[type=button]:hover{
+	background: #e2e2e2; /* Old browsers */
+	background: -moz-linear-gradient(top,  #e2e2e2 0%, #dbdbdb 50%, #d1d1d1 51%, #fefefe 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#e2e2e2), color-stop(50%,#dbdbdb), color-stop(51%,#d1d1d1), color-stop(100%,#fefefe)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #e2e2e2 0%,#dbdbdb 50%,#d1d1d1 51%,#fefefe 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e2e2e2', endColorstr='#fefefe',GradientType=0 ); /* IE6-9 */
+
+}
+form label.loginform-user, form label.loginform-password{	
+	float:left;
+	width:70px;
+	height: 32px;
+	line-height: 32px;
+	text-align:left;
+}
+form label.error{
+	color:#943728;
+	margin: 15px 0px;
+	padding: 5px;
+	display: block;
+	width: 385px;
+	border: 1px solid #934409;
+	background-color: #EFCEC9;
+}
+
+.erro, .sucesso, .alerta, .pergunta{
+	width:96%;
+	padding:2%;
+	margin:10px 0;
+	border-radius:5px;
+	-moz-border-radius:5px;	
+	-webkit-border-radius:5px;	
+	-o-border-radius:5px;	
+	-ms-border-radius:5px;	
+}
+.sucesso{
+	background:#eff4d4;
+	border:1px solid #8fad3d;
+	color:#596c26;
+}
+.alerta{
+	background:#ffea97;
+	border:1px solid #e2b500;
+	color:#995f5b;
+}
+.erro{
+	background:#efcec9;
+	border:1px solid #ad3f30;
+	color:#943728;
+}
+.pergunta{
+	background:#c6d8f0;
+	border:1px solid #4381cc;
+	color:#5c58b9;
+}
+
+/*FECHA CONFIG FORMULÁRIO*/
+
+/*PAINEL - Header*/
+
+div#fast-nav{
+	width: 100%;
+	height: 20px;
+	background-color: orange;
+	margin: 0px;
+	padding:0px;
+}

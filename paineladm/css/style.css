@@ -1,0 +1,119 @@
+ul, li, p, h1, h2, h3, h4, h5, h6 {margin: 0px; padding: 0px;}
+
+body{ background: #e9e9e9; margin:0 auto; } /*As barras de rolagem só aparecem no CONTENT com voerflow-y: auto*/
+
+.inibody{ padding:0; margin:0; }
+body.painel{ font: 12px "trebuchet MS"; color:#ddd; background:#e9e9e9; }
+a:link, a:active, a:visited{ text-decoration:none; color:#09F; }
+
+div.principal{position: absolute; top: -3px; width: 100%; height: 100%;}
+
+#wrapper{ width:100%; height: 100%; background:#E9E9E9; position: relative;}
+
+#incluir_chat{ width:220px; height: 100%; background:#E9E9E9; position: absolute; right: 0px; top: 0px;}
+
+
+div#fast-nav{ width: 100%; height: 50px; background-color: #000; margin: 0px; padding:0px; position: fixed; top: 0px; z-index: 1;}
+div#fast-nav ul{ list-style: none; position: absolute; right: 0px;}
+div#fast-nav ul li{ width: 125px; text-align: center; line-height: 50px; font-size: 14px; float: left; }
+div#fast-nav a{ font-family: sans-serif; font-size: 14px; color: #ffb800; }
+div#fast-nav a:hover{ color: #fff; }
+
+#header{ height:140px }
+#header-logo img{margin: 20px 15px;width: 80%;}
+
+#content *{font-family: sans-serif; font-size: 13px;}
+
+#wrap-content{display:table; width: 100%; margin-top: -25px;}
+#content{width: 90%; box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; position: absolute; top: 55px; right: 0px; height: 80%;color: #3a3a3a;height: 95%;}
+#content h2 { font-size: 25px; color: #7e7e7e; margin-bottom: 20px; font-weight: normal; font-family: sans-serif;}
+
+#sidebar { float: left; width: 10%; height: 100%; background: #FFFFFF; top: 50px; box-sizing: border-box; -ms-box-sizing: border-box;-moz-box-sizing: border-box; position: fixed; border-right: 1px solid #C0C0C0; }
+#sidebar ul li{ margin-bottom:1px; font-size:16px; display:block; width: 100%; padding-left: 10px; }
+#sidebar ul li a { font-family: sans-serif; display: block; color: #838383; text-decoration: none; font-size: 14px; width: 80%; height: 35px; line-height: 35px; padding-left: 20px; background: #FFF; border-bottom: 1px solid #ECECEC; }
+#sidebar ul li a:hover{ color: #ffb800;}
+#sidebar ul li.active a { color: #EBB041; }
+#sidebar ul li.active a:hover { color: #000; }
+#sidebar ul li.active ul li a { color: #8D8D8D; background: #F5F5F5; max-width: 133px; }
+#sidebar ul li.active ul li a:hover { color: #EBB041; }
+#sidebar ul li #header-logo{ padding: 0px !important; }
+
+#accordion ul{ display:none; margin: 0px; }
+#accordion ul li{ display: block; font-size: 14px; padding-left: 20px; }
+#footer{ width: 100%; height:20px; border-top:2px solid #999; text-align:center; /*position: absolute;*/ bottom: 0px; }
+
+/*Config de FORMULÁRIO*/
+#loginform{ width: 100%; height: 100%; font-family: 'Trebuchet MS'; top: 0px; padding-top: 100px; box-sizing:border-box; -webkit-box-sizing:border-box; }
+
+div#loginform-logo{ margin: 0 auto; padding-bottom: 20px; width: 375px; height: 105px; background: url('../images/creatibe/logo.svg') no-repeat; text-align: center; }
+ul.loginform-title li{ margin: 0 auto; width: 375px; text-align: center; }
+ul.loginform-title li img{ width: 60%; }
+ul.loginform-form{ }
+div#loginform form.userform{ padding: 20px; width: 400px; margin: 0 auto; background: white; border-top: 10px solid #FFB800; border-radius: 0px 0px 5px 5px; }
+
+form input.loginform-user, form input.loginform-password{ width: 315px; height: 35px;
+box-shadow: none !important;
+background: #F1F1F1 !important;
+border: 1px solid #CCC !important;
+border-radius: 0px !important;
+padding-left: 17px; font-family: 'times news roman'; font-style: italic; font-size: 15px; color: #919191; }
+
+form input.loginform-user:focus, form input.loginform-password:focus{ border: 1px solid #e5b449 !important; outline: none; }
+
+.loginform-submit { text-align: right; }
+
+fieldset{ padding:0px 0px; border: none;}
+form li{ padding:5px; list-style:none; }
+
+form input[type=submit], form input[type=button]{ cursor:pointer; padding:5px 25px; margin:0 5px; background: rgb(0, 104, 145); color: #fff; border: none; border-top: 5px solid rgb(0, 56, 78); height: 45px;}
+
+form input[type=submit]:hover, form input[type=button]:hover{background: #00202c;}
+
+form input[type=text], form input[type=password] { border:none; border-left: 5px solid #FFB800; margin-top: 3px; width: 100%; height: 40px; outline: none; padding-left: 10px; background: #FFF; color: #808080; font-family: sans-serif; font-size: 14px !important; }
+
+input.loginform-user, input.loginform-password{box-shadow: none !important; background: #292929 !important;}
+
+form label.loginform-user, form label.loginform-password{ float:left; width:70px; height: 32px; line-height: 32px; text-align:left;}
+form label.error [for=confsenha]{ color:#943728; margin: 15px 0px; padding: 5px; display: block; width: 385px !important; border: 1px solid #934409; background-color: #EFCEC9; /*position: relative;*/ left: 310px;}
+
+.erro, .sucesso, .alerta, .pergunta{ width:96%; padding:2%; margin:10px 0; border-radius:5px; -moz-border-radius:5px; -webkit-border-radius:5px; -o-border-radius:5px; -ms-border-radius:5px;}
+.sucesso{ background:#eff4d4; border:1px solid #8fad3d; color:#596c26;}
+.alerta{ background:#ffea97; border:1px solid #e2b500; color:#995f5b;}
+.erro{ background:#efcec9; border:1px solid #ad3f30; color:#943728;}
+.pergunta{ background:#c6d8f0; border:1px solid #4381cc; color:#5c58b9;}
+
+#content fieldset{border: none !important;}
+#content legend{display: none !important;}
+
+#content label {font-size: 15px; color: #858585; display: block; }
+label.error {
+color: red !important;
+font-weight: normal;
+font-size: 12px !important;
+display: block;
+width: 400px;
+height: 30px;
+background: #FFF5BE;
+text-align: center;
+line-height: 30px;
+border-radius: 5px;
+margin-top: 5px;
+border: 1px solid #FFD600;
+}
+
+textarea{width: 100%; height: 300px; resize: none; padding: 10px;}
+
+/*Laranja Creatibe = #DBAD4B */
+
+@media screen and (max-width: 1366px){
+	#sidebar {width: 18%;}
+	#content{width: 79%;}
+}
+@media screen and (max-width: 1280px){
+	#sidebar {width: 17%;}
+	#content{width: 80%;}
+}
+@media screen and (max-width: 1024px){
+	#sidebar {width: 21%;}
+	#content{width: 74%;}
+}
