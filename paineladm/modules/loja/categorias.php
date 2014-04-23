@@ -128,6 +128,40 @@ switch ($screen):
 					unset ($_POST['titulo']);
 					unset ($_POST['cadastrar']);
 				endif;
+				//DOM
+				$cat = $nome;
+				$dom 	= new DOMDocument('1.0','utf-8');
+				$dom->formatOutput = true;
+
+				$root 	= $dom->createElement($cat);
+				$txt 	= $dom->createTextNode(' '); //necessário vazio para abrir e fechar o elemento criado corretamente
+				$root->appendChild($txt);
+				$dom->appendChild($root);
+
+				$subcat = $_POST['sub_catsName'];
+
+				$rootSub 	= $dom->createElement('subcats');
+
+				$i = 0;
+				while ($i <= sizeof($subcat)-1) {
+					$subcatItem 	= $dom->createElement('subcat');
+					$subcatItemTxt 	= $dom->createTextNode($subcat[$i]);
+	
+					$subcatItem->appendChild($subcatItemTxt);
+	
+					$rootSub->appendChild($subcatItem);
+					$i++;
+					if ($i == sizeof($subcat)-1) {
+						$root->appendChild($rootSub);
+					}
+				}
+
+				$rootProduto 	= $dom->createElement('produtos');
+				$txtProduto		= $dom->createTextNode(' ');
+				$rootProduto->appendChild($txtProduto);
+				$root->appendChild($rootProduto);
+
+				$dom->save($cat.'.xml');
 			endif;
 ?>
 			<form  name=pagform method="post" action="">
@@ -151,6 +185,7 @@ switch ($screen):
 								$lerdb->selectAll($lerdb);
 								while ($resdb= $lerdb->returnData()):
 									echo '<input type="checkbox" name="sub_cats[]" value="'.$resdb->id.'" />'.$resdb->titulo.'&nbsp&nbsp';
+									echo '<input  type="hidden" name="sub_catsName[]" value="'.$resdb->nome.'" />';
 								endwhile;
 								?>
 								

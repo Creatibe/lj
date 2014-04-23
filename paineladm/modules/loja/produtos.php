@@ -165,6 +165,7 @@ switch ($screen):
 					//unset ($_POST['nome']);
 					//unset ($_POST['titulo']);
 					//unset ($_POST['cadastrar']);
+				//DOM
 					ins_prod_detalhes("",'personaliza&id=',$userid,$user_ip,$acao,$rotina."-Ins Detalhes",$titulo,$nome);
 
 				else:
@@ -1283,18 +1284,84 @@ function ins_prod_detalhes($id=null,$retorno=null,$userid=null,$user_ip=null,$ac
 					$resdb_prod= $lerdb_prod->returnData();					
 					
 					
-					$lerdb_scat = new cat_subcat();
-					$lerdb_scat->extra_select="where id =".$resdb_prod->categorias_id;	
+					$lerdb_scat = new cat_subcat_iscat();
+					$lerdb_scat->extra_select="where sc_id =".$resdb_prod->categorias_id;	
 					$lerdb_scat->selectAll($lerdb_scat);
 					$n_sc_ok = 0;
+
+					//$sc_itens = array();
+
 					while ($resdb_scat= $lerdb_scat->returnData()):
 						$n_sc_ok ++;
 						$x_sc = "sub_cat_";
 						$x_sc =$x_sc . $n_sc_ok; 
 						$$x_sc  = $resdb_scat->sc_id;
+
+						$x_nm = "nome_";
+						$x_nm =$x_nm . $n_sc_ok; 
+						$$x_nm  = $resdb_scat->i_sc_nome;
+						$sc_itens[] = $$x_nm;
+						echo "<br> xnm: ".$$x_nm;
+
+						$cat  = $resdb_scat->nome;
 						//echo '<br>Criando detalhes do produto :'.$x_sc. ': '.$$x_sc;
 					endwhile;
 
+					$arq 	= $cat.'.xml';
+
+					$file 	= file_get_contents($arq);
+					$dom 	= new DOMDocument('1.0', 'utf-8');
+					$dom->loadXML($file);
+
+					$subcats = $dom->getElementsByTagName('subcat');
+
+					$root 	= $dom->getElementsByTagName('produtos');
+
+					$codigo = $dom->createElement('codigo');
+					
+					$attr 	= $dom->createAttribute('id');
+				
+					$codigo->appendChild($attr);
+					echo '<br> ARQUIVO: '.$arq;
+					echo '<br> ID: '.$resdb_prod->id;
+					$tnode 	= $dom->createTextNode($resdb_prod->id.'_id');
+					$attr->appendChild($tnode);
+					
+					//Inserir nome do produto no XML
+					$produto 		= $dom->createElement('produto');
+					$nomeProduto 	= $dom->createTextNode($resdb_prod->nome);
+					$produto->appendChild($nomeProduto);
+					$codigo->appendChild($produto);
+					echo '<br> NOME: '.$resdb_prod->nome;
+					
+					//criar elementos de descrição do produto
+					$ie = 0;
+					while ($ie <= $subcats->length-1) {
+						$e[$ie]	= $dom->createElement($subcats->item($ie)->nodeValue);
+						$ie++;
+					}
+					echo '<pre>';
+					print_r($sc_itens);
+					echo '</pre>';
+					//criar conteudo dos elementos
+					$ic = 0;
+					while ($ic <= $subcats->length-1) {
+						$c[$ic] = $dom->createTextNode($sc_itens[$ic]);
+						$ic++;
+					}
+
+					//atribuir elementos dentro da tag <produtos>
+					$i = 0;
+					while ($i<=$subcats->length-1) {
+						$e[$i]->appendChild($c[$i]);
+						$codigo->appendChild($e[$i]);
+						$i++;
+						if ($i == $subcats->length-1) {
+							$root->item(0)->appendChild($codigo);
+						}
+					}
+				
+					$dom->save($arq);
 
 					//echo"<br>-----------------------id---->".$resdb_prod->id;
 					$gravadb = new detalhes_produtos(array(
