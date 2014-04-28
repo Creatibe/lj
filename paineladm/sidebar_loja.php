@@ -39,25 +39,36 @@ $userlogin = $session -> getVars('userlogin');
 					<li><a href="painel.php?p=loja&m=produtos&s=listar">Exibir</a></li>
 				</ul>
 			</li>	
+			<li><a class="item" href="#">Departamentos</a>
+				<ul>
+					<li><a href="painel.php?p=loja&m=depto&s=incluir">Cadastar</a></li>
+					<li><a href="painel.php?p=loja&m=depto&s=listar">Exibir</a></li>
+				</ul>
+			</li>			
 			<li><a class="item" href="#">Categorias</a>
 				<ul>
 					<li><a href="painel.php?p=loja&m=categorias&s=incluir">Cadastar</a></li>
 					<li><a href="painel.php?p=loja&m=categorias&s=listar">Exibir</a></li>
 				</ul>
 			</li>
-			<li><a class="item" href="#">Personalizar Categorias</a>
+			<li><a class="item" href="#">Sub-Categorias</a>
 				<ul>
-					<li><a href="painel.php?p=loja&m=sub_categorias&s=incluir">Cadastar</a></li>
-					<li><a href="painel.php?p=loja&m=sub_categorias&s=listar">Exibir</a></li>
+					<li><a href="painel.php?p=loja&m=sub_cat&s=incluir">Cadastar</a></li>
+					<li><a href="painel.php?p=loja&m=sub_cat&s=listar">Exibir</a></li>
 				</ul>
 			</li>	
-			<li><a class="item" href="#">Itens de Personalização</a>
+			<li><a class="item" href="#">Caracteristicas</a>
 				<ul>
-					<li><a href="painel.php?p=loja&m=item_sub_cat&s=incluir">Cadastar</a></li>
-					<li><a href="painel.php?p=loja&m=item_sub_cat&s=listar">Exibir</a></li>
+					<li><a href="painel.php?p=loja&m=caract&s=incluir">Cadastar</a></li>
+					<li><a href="painel.php?p=loja&m=caract&s=listar">Exibir</a></li>
 				</ul>
 			</li>
-	
+			<li><a class="item" href="#">Opções</a>
+				<ul>
+					<li><a href="painel.php?p=loja&m=Opcoes&s=incluir">Cadastar</a></li>
+					<li><a href="painel.php?p=loja&m=Opcoes&s=listar">Exibir</a></li>
+				</ul>
+			</li>		
 
 	
 
