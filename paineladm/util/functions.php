@@ -317,7 +317,13 @@ function getMSG($cb_msg=NULL,$type_msg=NULL,$extras_msg=NULL){
 				break;				
 			case "cb-802":
 			    $msg_return= $cb_msg.' - ERRO AO GRAVAR - Registro duplicado - <strong>'.$extras_msg.'</strong>';
+				break;	
+			case "cb-803":
+			    $msg_return= $cb_msg.' - ERRO AO GRAVAR o Registro - <strong>'.$extras_msg.'</strong>';
 				break;		
+			case "cb-804":
+			    $msg_return= $cb_msg.' - ERRO AO EXCLUIR o Registro - <strong>'.$extras_msg.'</strong>';
+				break;					
 			case "cb-901":
 			    $msg_return= $cb_msg.' - Acesso ao Sistema com Sucesso';
 				break;	
