@@ -35,7 +35,7 @@ if (isset($_REQUEST['msgtype'])):
 else:
 	$msgtype = "pergunta";	 
 endif;
-$dir = "../upload/images/galerias";
+$dir = "../upload/images/loja/galerias";
 switch ($screen):
 	case 'incluir':
 		//$session = new session();
@@ -60,7 +60,7 @@ switch ($screen):
 				));
 				$gravadb ->insertDB($gravadb );
 				//Inicio - Cria a Pasta da Galeria
-				$caminho = dirname(dirname(dirname(__FILE__)))."/upload/images/".$nome;
+				$caminho = dirname(dirname(dirname(__FILE__)))."/upload/images/loja/".$nome;
 				if(is_dir($caminho)):
 					//echo 'existe - '.$caminho;
 				else:
@@ -269,8 +269,8 @@ switch ($screen):
 				$updtdb ->pk_value = $id;
 				$updtdb ->updateDB($updtdb );
 				// Início verificar se precisa trocar o nome da pasta
-				$caminho_novo = dirname(dirname(dirname(__FILE__)))."/upload/images/".$nome;
-				$caminho_velho = dirname(dirname(dirname(__FILE__)))."/upload/images/".$resdb->nome;
+				$caminho_novo = dirname(dirname(dirname(__FILE__)))."/upload/images/loja/".$nome;
+				$caminho_velho = dirname(dirname(dirname(__FILE__)))."/upload/images/loja/".$resdb->nome;
 				if(is_dir($caminho_novo)):
 					//echo 'existe - '.$caminho;
 				else:
@@ -393,7 +393,7 @@ switch ($screen):
 					$deldb->deleteDB($deldb);
 					if ($deldb->countline==1):
 						// Início - excluir past e arquivos da Galeria
-						$caminho = dirname(dirname(dirname(__FILE__)))."/upload/images/".$resdb->nome;
+						$caminho = dirname(dirname(dirname(__FILE__)))."/upload/images/loja/".$resdb->nome;
 						deleteDirectory ( $caminho );
 						// final - excluir past e arquivos da Galeria						
 						// Início  - Rotina de gravar logs
@@ -431,7 +431,7 @@ switch ($screen):
 				getMSG('cb-906','alerta',NULL);
 			endif;
 			// Início - Mostra os registro da pasta a ser exculída
-			$caminho = dirname(dirname(dirname(__FILE__)))."/upload/images/".$resdb->nome;
+			$caminho = dirname(dirname(dirname(__FILE__)))."/upload/images/loja/".$resdb->nome;
 			if(is_dir($caminho)):
 			   //echo 'existe - '.$caminho;
 			   $diretorio = dir($caminho);

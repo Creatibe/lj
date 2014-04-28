@@ -24,6 +24,7 @@ $user_id = $session->getVars('userid');
 $user_ip = $_SERVER['REMOTE_ADDR'];
 $acao    = $_REQUEST['s'];
 $rotina  = $_REQUEST['m'];
+$painel  = $_REQUEST['p'];
 		
 if (isset($_REQUEST['error'])):
 	$error = $_REQUEST['error'];
@@ -35,7 +36,7 @@ if (isset($_REQUEST['msgtype'])):
 else:
 	$msgtype = "pergunta";	 
 endif;
-$dir = "../upload/images/imagens";
+$dir = "../upload/images/loja/";
 switch ($screen):
 	case 'incluir':
 		//$session = new session();
@@ -67,7 +68,7 @@ switch ($screen):
 						//echo "<br> Passou aqui arquivo - ".$nomeArquivo;
 						//echo "<br> Passou aqui tamanho - ".$tamanhoArquivo;
 						//echo "<br> Passou aqui temporario - ".$nomeTemporario;
-						$upload = new upload($nomeArquivo, $tamanhoArquivo, $nomeTemporario, $error, 175, 175, "/upload/images/".$diretorio); 
+						$upload = new upload($nomeArquivo, $tamanhoArquivo, $nomeTemporario, $error, 175, 175, $dir.$diretorio); 
 						echo $upload->salvar(); 
 						$titulo = $nomeArquivo; 
 						$descriimagens = "descrimagem-".$i;

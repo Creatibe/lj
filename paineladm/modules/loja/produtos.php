@@ -103,11 +103,14 @@ switch ($screen):
 			if (!isset($_REQUEST['estoque']))  	    $estoque       = "";     else $estoque       = $_REQUEST['estoque'];
 			if (!isset($_REQUEST['encomenda']))	    $encomenda     = "";     else $encomenda     = $_REQUEST['encomenda'];
 			if (!isset($_REQUEST['fixar_home']))    $fixar_home    = "";     else $fixar_home    = $_REQUEST['fixar_home'];
-			if (!isset($_REQUEST['categorias']))    $categorias    = "";     else $categorias    = $_REQUEST['categorias'];
 			if (!isset($_REQUEST['qtde_vendida']))  $qtde_vendida  = "";     else $qtde_vendida  = $_REQUEST['qtde_vendida'];
 			if (!isset($_REQUEST['valor_vendido'])) $valor_vendido = "";     else $valor_vendido = $_REQUEST['valor_vendido'];
 			if (!isset($_REQUEST['status']))        $status        = "";     else $status        = $_REQUEST['status'];
-			if (!isset($_REQUEST['relevancia']))    $relevancia    = "";     else $relevancia    = $_REQUEST['relevancia'];
+			if (!isset($_REQUEST['depto_id']))      $depto_id      = "";     else $depto_id      = $_REQUEST['depto_id'];
+			if (!isset($_REQUEST['categorias_id'])) $categorias_id = "";     else $categorias_id = $_REQUEST['categorias_id'];
+			if (!isset($_REQUEST['sub_cat_id']))    $sub_cat_id    = "";     else $sub_cat_id    = $_REQUEST['sub_cat_id'];
+			if (!isset($_REQUEST['marca_id']))      $marca_id      = "";     else $marca_id      = $_REQUEST['marca_id'];
+			
 			$user_resp   = $userid;	
 			date_default_timezone_set('America/Sao_Paulo');
 			$datacad   = date('Y-m-d H:i:s');		
@@ -117,7 +120,7 @@ switch ($screen):
 			$promocao = str_replace(".", "", $promocao);
 			$promocao = str_replace(",", ".", $promocao);
 			if (isset($_POST['cadastrar'])):
-				$gravadb = new produtos(array(
+				$gravadb_prod = new produtos(array(
 					'sku'           =>$sku,
 					'nome'          =>$nome,
 					'titulo'        =>$titulo,
@@ -133,9 +136,12 @@ switch ($screen):
 					'relevancia'    =>$relevancia,
 					'data_cad'      =>$datacad,
 					'user_id'       =>$userid,
-					'categorias_id' =>$categorias,
+					'depto_id'      =>$categorias_id,
+					'categorias_id' =>$categorias_id,
+					'sub_cat_id'    =>$sub_cat_id,
+					'marca_id'      =>$marca_id,
 				));
-				$gravadb ->insertDB($gravadb );
+				$gravadb_prod ->insertDB($gravadb_prod );
 				
 				// Início  - Rotina de gravar logs
 				if(isset($id ))                 $reg_id            = "<p>Reg no DB: ".$id."</p>";                  else $reg_id            ="";
@@ -153,24 +159,20 @@ switch ($screen):
 				if(isset($fixar_home ))         $reg_fixar_home    = "<p>Fixo na Home:  ".$fixar_home."</p>";      else $reg_fixar_home    ="";
 				if(isset($qtde_vendida ))       $reg_qtde_vendida  = "<p>Qtde Vendida:  ".$qtde_vendida."</p>";    else $reg_qtde_vendida  ="";
 				if(isset($valor_vendido ))      $reg_valor_vendido = "<p>Valor Vendido:  ".$valor_vendido."</p>";  else $reg_valor_vendido ="";
-				if(isset($categorias ))         $reg_categorias    = "<p>Categoria:  ".$categorias."</p>";         else $reg_categorias    ="";
+				if(isset($depto_id ))           $reg_depto_id      = "<p>Departamento:  ".$depto_id."</p>";        else $reg_depto_id      ="";
+				if(isset($categorias_id ))      $reg_categorias_id = "<p>Categoria:  ".$categorias_id."</p>";      else $reg_categorias_id ="";
+				if(isset($sub_cat_id ))         $reg_sub_cat_id    = "<p>Sub-Categoria:  ".$sub_cat_id."</p>";     else $reg_sub_cat_id    ="";
+				if(isset($marca_id ))           $reg_marca_id      = "<p>Marca:  ".$marca_id."</p>";               else $reg_marca_id ="";
 				$registro  =$reg_id.$reg_nome.$reg_titulo.$reg_valor.$reg_desconto.$reg_promocao.$reg_estoque.$reg_encomenda;
-				$registro .=$reg_fixar_home.$reg_qtde_vendida.$reg_valor_vendido.$reg_status.$reg_relevancia.$reg_categorias.$reg_data.$reg_user;
-				if ($gravadb ->countline==1):
+				$registro .=$reg_fixar_home.$reg_qtde_vendida.$reg_valor_vendido.$reg_status.$reg_relevancia.$reg_depto_id.$reg_categorias_id;
+				$registro .=$reg_sub_cat_id.$reg_marca_id.$reg_data.$reg_user;
+				if ($gravadb_prod ->countline==1):
 					grava_log($userid,$user_ip,$rotina,$acao,$registro,$datacad); 	
-					// Final  - Rotina de gravar logs	
-					//echo '<script> location.href="?p=loja&m=produtos&s=editar&sc='.$nome.'&datacad='.$datacad.'" </script>';
-					//$extra_msg = '<a href="'.ADMURL.'?p=loja&m=produtos&s=editar&sc='.$nome.'&datacad='.$datacad.'">Cadastrar Opções</a>';
-					//getMSG('cb-911','sucesso',$extra_msg);
-					//unset ($_POST['nome']);
-					//unset ($_POST['titulo']);
-					//unset ($_POST['cadastrar']);
 				//DOM
 					ins_prod_detalhes("",'personaliza&id=',$userid,$user_ip,$acao,$rotina."-Ins Detalhes",$titulo,$nome);
-
 				else:
-					echo "Erro ao gravar o registro<br>";
-					echo $registro;
+					$extra_msg = $reg_nome;
+					getMSG('cb-803','alerta',$extra_msg);		
 				endif;
 			endif;
 ?>
@@ -187,18 +189,40 @@ switch ($screen):
 							</li>
 							
 							<?php
-								$lerdb = new categorias();
-								$lerdb->extra_select="where status = 1";	
-								$lerdb->selectAll($lerdb);
-								echo '<li><label for="categorias">Selecione a Categoria do Produto:</label>';
+								$lerdb_depto = new depto();
+								$lerdb_depto->extra_select="where status = 1";	
+								$lerdb_depto->selectAll($lerdb_depto);
+								echo '<li><label for="categorias">Selecione o Departamento do Produto:';
 								echo '<select name="categorias">';
-								while ($resdb= $lerdb->returnData()):
-									echo '	<option value='.$resdb->id.'>'.$resdb->nome.'</option>';
+								while ($resdb_depto= $lerdb_depto->returnData()):
+									echo '	<option value='.$resdb_depto->id.'>'.$resdb_depto->nome.'</option>';
 								endwhile;
-								echo '</select>';
+								echo '</select></label>';
+								echo '</li>';
+
+								$lerdb_cat = new categorias();
+								$lerdb_cat->extra_select="where status = 1";	
+								$lerdb_cat->selectAll($lerdb_cat);
+								echo '<li><label for="categorias">Selecione a Categoria do Produto:';
+								echo '<select name="categorias">';
+								while ($resdb_cat= $lerdb_cat->returnData()):
+									echo '	<option value='.$resdb_cat->id.'>'.$resdb_cat->nome.'</option>';
+								endwhile;
+								echo '</select></label>';
+								echo '</li>';
+
+								$lerdb_scat = new sub_cat();
+								$lerdb_scat->extra_select="where status = 1";	
+								$lerdb_scat->selectAll($lerdb_scat);
+								echo '<li><label for="categorias">Selecione a Sub-Categoria do Produto:';
+								echo '<select name="categorias">';
+								while ($resdb_scat= $lerdb_scat->returnData()):
+									echo '	<option value='.$resdb_scat->id.'>'.$resdb_scat->nome.'</option>';
+								endwhile;
+								echo '</select></label>';
 								echo '</li>';
 							?>
-							
+							</br>
 							<li><label for="titulo">Descrição do Produto:</label>
 								<input type="text" class="area_editavel_pagina" name="titulo" id="titulo"  maxlength="255" autofocus
 								 placeholder="Descrição do Produto - Tamanho max 255 caracteres" 
@@ -235,30 +259,30 @@ switch ($screen):
 							</li>
 		            	</div>
 						<div >
-						<li><label for="encomenda">Este produto aceitará encomendas quando o estoque for zero(0)?</label>
+						<li><label for="encomenda">Este produto aceitará encomendas quando o estoque for zero(0)?
 							<select name="encomenda">
 								<option selected="selected" value=0>Não</option>
 								<option value=1>Sim</option>
-							</select>
-						<li><label for="fixar_home">Este Produto deverá aparecer sempre na Página Home(Principal) do Site?</label>
+							</select></label>
+						<li><label for="fixar_home">Este Produto deverá aparecer sempre na Página Home(Principal) do Site?
 							<select name="menu">
 								<option selected="selected" value=0>Não</option>
 								<option value=1>Sim</option>
-							</select>							
-						<li><label for="status">Status:</label>
+							</select></label>							
+						<li><label for="status">Status:
 							<select name="status" disabled>
 								<option value=0>Inativo</option>
 								<option value=1>Ativo</option>
 								<option value=2>Aguardando Aprovação</option>
 								<option selected="selected" value=3>Pendente</option>
-							</select> O Status ficará pendente até personalizar o produto
-						 	<label for="relevancia">Relevancia:</label>
+							</select> O Status ficará Pendente até que o produto seja personalizado.</label>
+						 	<label for="relevancia">Relevancia:
 							<select name="relevancia">
 								<option value=0>Baixa</option>
 								<option selected="selected" value=1>Normal</option>
 								<option value=2>Média</option>
 								<option value=3>Alta</option>
-							</select>
+							</select></label>
 						</li>
 						</div>
 						
@@ -1285,7 +1309,7 @@ function ins_prod_detalhes($id=null,$retorno=null,$userid=null,$user_ip=null,$ac
 					
 					
 					$lerdb_scat = new cat_subcat_iscat();
-					$lerdb_scat->extra_select="where sc_id =".$resdb_prod->categorias_id;	
+					$lerdb_scat->extra_select="where id =".$resdb_prod->categorias_id;	
 					$lerdb_scat->selectAll($lerdb_scat);
 					$n_sc_ok = 0;
 
@@ -1295,7 +1319,7 @@ function ins_prod_detalhes($id=null,$retorno=null,$userid=null,$user_ip=null,$ac
 						$n_sc_ok ++;
 						$x_sc = "sub_cat_";
 						$x_sc =$x_sc . $n_sc_ok; 
-						$$x_sc  = $resdb_scat->sc_id;
+						$$x_sc  = $resdb_scat->i_sc_id;
 
 						$x_nm = "nome_";
 						$x_nm =$x_nm . $n_sc_ok; 
