@@ -94,6 +94,18 @@ abstract class database {
 		//echo $sql;
 		return $this->execSQL($sql);
 	} // Final da Rotina de delete no db
+	public function deleteDBField($object){
+		// DELETE FROM nome_tabela WHERE cpochave=valorchave
+		$sql = "DELETE FROM ".$object->table;
+		//$sql .= " WHERE '".$field."'=";
+				if ($object->extra_select != NULL):
+			$sql .= " ".$object->extra_select;
+			//echo "<br>------> SQL : ".$sql."<br>";
+		endif;
+		//$sql .= is_numeric($object->pk_value) ? $object->pk_value : "'".$object->pk_value."'";		
+		//echo "<br>".$sql;
+		return $this->execSQL($sql);
+	} // Final da Rotina de delete no db	
 	//Início da Rotina para selecionar todos os registros da tabela	(manual)
 	public function selectManual($object){
 		//$sql = $object->table;

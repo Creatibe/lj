@@ -33,6 +33,12 @@ $userlogin = $session -> getVars('userlogin');
 					<li><a href="painel.php?m=contatos&s=listar"><?php echo $contatos?></a></li>
 				</ul>
 			</li>
+			<li><a class="item" href="#">Campanhas</a>
+				<ul>
+					<li><a href="painel.php?p=loja&m=campanhas&s=incluir">Cadastar</a></li>
+					<li><a href="painel.php?p=loja&m=campanhas&s=listar">Exibir</a></li>
+				</ul>
+			</li>				
 			<li><a class="item" href="#">Produtos</a>
 				<ul>
 					<li><a href="painel.php?p=loja&m=produtos&s=incluir">Cadastar</a></li>
